@@ -259,6 +259,8 @@ A pattern I use and keep seeing elsewhere: **PydanticAI for the agent logic, Lan
 - Pin server versions like any dependency; a poisoned server in the chain owns everything downstream.
 - Scope write access separately from read access, always behind approval gates.
 
+**Shared MCP access governance:** [Speakeasy control plane](https://www.speakeasy.com/) is an option when shared MCP servers need identity-provider roles, per-tool permissions, security policies, and centralized audit logs. The [MoonPay deployment write-up](https://aaif.io/blog/ai-governance-in-a-regulated-industry-how-moonpay-brought-mcp-sprawl-under-control), coauthored by the customer and vendor, describes this setup in production. Gateway controls cover routed calls; keep separate sandbox and egress restrictions for code execution and direct network access.
+
 **Agent memory** (Mem0, Zep/Graphiti, Letta): treat it as a retrieval problem with a write policy, not magic. Start with scoped summaries + your existing retrieval stack; adopt a memory product only when you can articulate what it does that they do not.
 
 **Sandboxing:** if an agent executes generated code, it runs in a real sandbox (E2B, Daytona, or your own Firecracker/gVisor setup). Not a subprocess with a timeout. This is the least negotiable line in this document.
